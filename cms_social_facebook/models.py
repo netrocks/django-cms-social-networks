@@ -48,7 +48,7 @@ class FacebookFacepile(CMSPlugin):
         default=1)
 
     action = models.CharField(_("Actions separate by commas"),
-        default=None, null=True, blank=True)
+        default=None, null=True, blank=True, max_length=255)
 
     def __unicode__(self):
         return "Facepile (%s)" % (self.pageurl)
@@ -111,7 +111,7 @@ class FacebookLike(CMSPlugin):
         return "Like (%s)" % (self.pageurl)
 
 class FacebookLoginButton(CMSPlugin):
-    appId = models.CharField(_("App ID"))
+    appId = models.CharField(_("App ID"), max_length=255)
 
     width = models.PositiveSmallIntegerField(_("Width"), default=None, null=True,
         blank=True, help_text=_("Leave empty for auto scaling"))
@@ -126,10 +126,10 @@ class FacebookLoginButton(CMSPlugin):
         return "Facebook Login Button (%s)" % (self.appId)
 
 class FacebookLivestream(CMSPlugin):
-    appId = models.CharField(_("App ID"))
+    appId = models.CharField(_("App ID"), max_length=255)
 
     event_app_id = models.CharField(_("Event App Id"),
-            help_text=_("Your Facebook application ID or API key")
+            help_text=_("Your Facebook application ID or API key"), max_length=255
             )
 
     width = models.PositiveSmallIntegerField(_("Width"), default=None, null=True,
@@ -137,7 +137,7 @@ class FacebookLivestream(CMSPlugin):
     height = models.PositiveSmallIntegerField(_("Height"), default=None, null=True,
         blank=True, help_text=_("Leave empty for auto scaling"))
 
-    always_post_to_friends =models.BooleanField(_("Always_post to friends"),
+    always_post_to_friends =models.NullBooleanField(_("Always_post to friends"),
             blank=True,
             null=True,
             default=None,
@@ -146,7 +146,7 @@ profile. This option should only be used when users' posts
 are likely to make sense outside of the context of the
 event.''')
             )
-    xid = models.BooleanField(_("XID"),
+    xid = models.NullBooleanField(_("XID"),
             blank=True,
             null=True,
             default=None,
