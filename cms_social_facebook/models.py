@@ -80,6 +80,7 @@ class FacebookLikebox(CMSPlugin):
 
 
 class FacebookLike(CMSPlugin):
+    appId = models.CharField(_("App ID"), max_length=255)
     pageurl = models.URLField(_("URL that you like it"))
 
     width = models.PositiveSmallIntegerField(_("Width"), default=None, null=True,
